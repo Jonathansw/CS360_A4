@@ -1,0 +1,23 @@
+The first problem which deals with the greater than, less than ops can be run with
+Mirkwood:MiniPython John$ python interpreterext.py < TestInput/simple_bool.p
+[42]
+Running Program
+Dump of Symbol Table
+Name Table
+  gta -> False
+  gtb -> True
+  neqa -> True
+  neqb -> False
+  ltb -> True
+  lta -> False
+  gteb -> False
+  gtea -> True
+  eqa -> True
+  lteb -> False
+  ltea -> True
+  eqb -> False
+Function Table
+
+The Input file is the simple_bool.p which just does a bunch of comparisons.  
+
+The last problem is contained in the project4.pdf file, its a 2 page paper on basic program controls
