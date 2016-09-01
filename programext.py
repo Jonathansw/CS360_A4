@@ -231,13 +231,6 @@ class Nequal( Expr ):
 		self.rhs.display(nt, ft, depth+1)
 
 
-
-
-
-
-
-
-
 class Minus( Expr ) :
 	'''expression for binary subtraction'''
 
@@ -389,6 +382,51 @@ class StmtList :
 		for s in self.sl :
 			s.display( nt, ft, depth+1 )
 
+class TermList :
+	'''builds/stores a list of TERMS'''
+
+	def __init__( self ) :
+		self.sl = []
+
+	def insert( self, stmt ) :
+		self.sl.insert( 0, stmt )
+
+	def eval( self, nt, ft ) :
+		for s in self.sl :
+			s.eval( nt, ft )
+ 
+	def display( self, nt, ft, depth=0 ) :
+		print "%sNUM LIST" % (tabstop*depth)
+		for s in self.sl :
+			s.display( nt, ft, depth+1 )
+
+class cons (Expr) :
+	def __init__( self ) :
+		self.sl = []
+
+	def eval( self, Expr ) :
+		self.sl.insert( 0, Expr )
+
+class car (Expr) :
+	def __init__( self ) :
+		self.sl = []
+
+	def eval( self, nt, ft ) :
+		return self.sl[0]
+
+class cdr (Expr) :
+	def __init__( self ) :
+		self.sl = []
+
+	def eval( self, nt, ft ) :
+		return self.sl[1:]
+
+class null (Expr) :
+	def __init__( self ) : 
+		self.sl = []
+
+	def eval(self, nt, ft) :
+		return len(self.sl) == 0
 
 class Proc :
 	'''stores a procedure (formal params, and the body)

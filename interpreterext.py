@@ -32,6 +32,12 @@ tokens = (
 	'TIMES',
 	'LPAREN',
 	'RPAREN',
+	'LBRACKET',
+	'RBRACKET',
+	'CAR',
+	'CDR',
+	'CONS',
+	'NULL',
 	'SEMICOLON',
 	'COMMA',
 	'NUMBER',
@@ -66,7 +72,11 @@ reserved = {
 		'fi'		: 'FI',
 		'define': 'DEFINE',
 		'proc'	: 'PROC',
-		'end'		: 'END'
+		'end'		: 'END',
+		'car'  : 'CAR',
+		'cdr'  : 'CDR',
+		'cons'  : 'CONS',
+		'null'  : 'NULL'
 		}
 
 # Now, this section.  We have a mapping, REs to token types (please note
@@ -93,6 +103,8 @@ t_LE = r'<='
 t_GE = r'>='
 t_EQ = r'=='
 t_NE = r'!='
+t_LBRACKET  = r'\['
+t_RBRACKET  = r'\]'
 
 def t_IDENT( t ):
 	#r'[a-zA-Z_][a-zA-Z_0-9]*'
@@ -255,6 +267,31 @@ def p_nequal( p ):
 	'expr : expr NE expr'
 	p[0] = Nequal(p[1], p[3])
 
+def p_term_list( p ) :
+ '''term_list : term COMMA term_list
+       | term'''
+ if len( p ) == 2 :  # single term => new list
+   p[0] = TermList()
+   p[0].insert( p[1] )
+ else :  # we have a TermList, keep adding to front
+   p[3].insert( p[1] )
+   p[0] = p[3]
+
+def p_cons( p ):
+	'term_list : CONS expr COMMA term_list'
+	p[0] = cons(p[2], p[4])
+
+def p_car( p ):
+	'term_list : CAR term_list'
+	p[0] = car(p[2])
+
+def p_cdr( p ):
+	'term_list : CDR term_list'
+	p[0] = cdr(p[2])
+
+def p_null( p ):
+	'term_list : NULL term_list'
+	p[0] = null(p[2])
 
 # Error rule for syntax errors
 def p_error( p ):
