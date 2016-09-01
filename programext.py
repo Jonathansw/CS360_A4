@@ -394,39 +394,42 @@ class TermList :
 	def eval( self, nt, ft ) :
 		for s in self.sl :
 			s.eval( nt, ft )
- 
+
 	def display( self, nt, ft, depth=0 ) :
 		print "%sNUM LIST" % (tabstop*depth)
 		for s in self.sl :
 			s.display( nt, ft, depth+1 )
 
 class cons (Expr) :
-	def __init__( self ) :
-		self.sl = []
+	def __init__( self, lst, body ) :
+		self.value = lst
+		self.body = body
 
-	def eval( self, Expr ) :
-		self.sl.insert( 0, Expr )
+	def eval( self, nt, ft ) :
+		x = self.value.eval(nt, ft)
+		y = self.body.eval(nt, ft)
+		return x.insert(0, x)
 
 class car (Expr) :
-	def __init__( self ) :
-		self.sl = []
+	def __init__( self, lst ) :
+		self.value = lst
 
 	def eval( self, nt, ft ) :
-		return self.sl[0]
+		return self.value.eval(nt, ft)[0]
 
 class cdr (Expr) :
-	def __init__( self ) :
-		self.sl = []
+	def __init__( self, lst ) :
+		self.value = lst
 
 	def eval( self, nt, ft ) :
-		return self.sl[1:]
+		return self.value.eval(nt, ft)[1:]
 
 class null (Expr) :
-	def __init__( self ) : 
-		self.sl = []
+	def __init__( self, lst ) :
+		self.value = lst
 
 	def eval(self, nt, ft) :
-		return len(self.sl) == 0
+		return len(self.value.eval(nt, ft)) == 0
 
 class Proc :
 	'''stores a procedure (formal params, and the body)

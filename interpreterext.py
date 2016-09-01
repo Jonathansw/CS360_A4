@@ -271,8 +271,7 @@ def p_term_list( p ) :
  '''term_list : term COMMA term_list
        | term'''
  if len( p ) == 2 :  # single term => new list
-   p[0] = TermList()
-   p[0].insert( p[1] )
+   p[0] = [ p[1] ]
  else :  # we have a TermList, keep adding to front
    p[3].insert( p[1] )
    p[0] = p[3]
