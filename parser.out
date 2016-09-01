@@ -1,0 +1,1606 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> stmt_list
+Rule 2     stmt_list -> stmt SEMICOLON stmt_list
+Rule 3     stmt_list -> stmt
+Rule 4     stmt -> assign_stmt
+Rule 5     stmt -> while_stmt
+Rule 6     stmt -> if_stmt
+Rule 7     stmt -> define_stmt
+Rule 8     expr -> expr PLUS term
+Rule 9     expr -> expr MINUS term
+Rule 10    expr_list -> expr COMMA expr_list
+Rule 11    expr_list -> expr
+Rule 12    expr -> term
+Rule 13    term -> term TIMES fact
+Rule 14    term -> fact
+Rule 15    fact -> LPAREN expr RPAREN
+Rule 16    fact -> NUMBER
+Rule 17    fact -> IDENT
+Rule 18    fact -> func_call
+Rule 19    assign_stmt -> IDENT ASSIGNOP expr
+Rule 20    while_stmt -> WHILE expr DO stmt_list OD
+Rule 21    if_stmt -> IF expr THEN stmt_list ELSE stmt_list FI
+Rule 22    define_stmt -> DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END
+Rule 23    param_list -> IDENT COMMA param_list
+Rule 24    param_list -> IDENT
+Rule 25    func_call -> IDENT LPAREN expr_list RPAREN
+Rule 26    expr -> expr LT expr
+Rule 27    expr -> expr GT expr
+Rule 28    expr -> expr GE expr
+Rule 29    expr -> expr LE expr
+Rule 30    expr -> expr EQ expr
+Rule 31    expr -> expr NE expr
+
+Terminals, with rules where they appear
+
+ASSIGNOP             : 19
+COMMA                : 10 23
+DEFINE               : 22
+DO                   : 20
+ELSE                 : 21
+END                  : 22
+EQ                   : 30
+FI                   : 21
+GE                   : 28
+GT                   : 27
+IDENT                : 17 19 22 23 24 25
+IF                   : 21
+LE                   : 29
+LPAREN               : 15 22 25
+LT                   : 26
+MINUS                : 9
+NE                   : 31
+NUMBER               : 16
+OD                   : 20
+PLUS                 : 8
+PROC                 : 22
+RPAREN               : 15 22 25
+SEMICOLON            : 2
+THEN                 : 21
+TIMES                : 13
+WHILE                : 20
+error                : 
+
+Nonterminals, with rules where they appear
+
+assign_stmt          : 4
+define_stmt          : 7
+expr                 : 8 9 10 11 15 19 20 21 26 26 27 27 28 28 29 29 30 30 31 31
+expr_list            : 10 25
+fact                 : 13 14
+func_call            : 18
+if_stmt              : 6
+param_list           : 22 23
+program              : 0
+stmt                 : 2 3
+stmt_list            : 1 2 20 21 21 22
+term                 : 8 9 12 13
+while_stmt           : 5
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . stmt_list
+    (2) stmt_list -> . stmt SEMICOLON stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . assign_stmt
+    (5) stmt -> . while_stmt
+    (6) stmt -> . if_stmt
+    (7) stmt -> . define_stmt
+    (19) assign_stmt -> . IDENT ASSIGNOP expr
+    (20) while_stmt -> . WHILE expr DO stmt_list OD
+    (21) if_stmt -> . IF expr THEN stmt_list ELSE stmt_list FI
+    (22) define_stmt -> . DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END
+
+    IDENT           shift and go to state 6
+    WHILE           shift and go to state 1
+    IF              shift and go to state 8
+    DEFINE          shift and go to state 5
+
+    stmt_list                      shift and go to state 9
+    if_stmt                        shift and go to state 10
+    define_stmt                    shift and go to state 2
+    stmt                           shift and go to state 7
+    assign_stmt                    shift and go to state 3
+    while_stmt                     shift and go to state 11
+    program                        shift and go to state 4
+
+state 1
+
+    (20) while_stmt -> WHILE . expr DO stmt_list OD
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    term                           shift and go to state 16
+    expr                           shift and go to state 17
+    fact                           shift and go to state 18
+
+state 2
+
+    (7) stmt -> define_stmt .
+
+    SEMICOLON       reduce using rule 7 (stmt -> define_stmt .)
+    ELSE            reduce using rule 7 (stmt -> define_stmt .)
+    END             reduce using rule 7 (stmt -> define_stmt .)
+    FI              reduce using rule 7 (stmt -> define_stmt .)
+    $end            reduce using rule 7 (stmt -> define_stmt .)
+    OD              reduce using rule 7 (stmt -> define_stmt .)
+
+
+state 3
+
+    (4) stmt -> assign_stmt .
+
+    SEMICOLON       reduce using rule 4 (stmt -> assign_stmt .)
+    ELSE            reduce using rule 4 (stmt -> assign_stmt .)
+    END             reduce using rule 4 (stmt -> assign_stmt .)
+    FI              reduce using rule 4 (stmt -> assign_stmt .)
+    $end            reduce using rule 4 (stmt -> assign_stmt .)
+    OD              reduce using rule 4 (stmt -> assign_stmt .)
+
+
+state 4
+
+    (0) S' -> program .
+
+
+
+state 5
+
+    (22) define_stmt -> DEFINE . IDENT PROC LPAREN param_list RPAREN stmt_list END
+
+    IDENT           shift and go to state 19
+
+
+state 6
+
+    (19) assign_stmt -> IDENT . ASSIGNOP expr
+
+    ASSIGNOP        shift and go to state 20
+
+
+state 7
+
+    (2) stmt_list -> stmt . SEMICOLON stmt_list
+    (3) stmt_list -> stmt .
+
+    SEMICOLON       shift and go to state 21
+    $end            reduce using rule 3 (stmt_list -> stmt .)
+    ELSE            reduce using rule 3 (stmt_list -> stmt .)
+    END             reduce using rule 3 (stmt_list -> stmt .)
+    OD              reduce using rule 3 (stmt_list -> stmt .)
+    FI              reduce using rule 3 (stmt_list -> stmt .)
+
+
+state 8
+
+    (21) if_stmt -> IF . expr THEN stmt_list ELSE stmt_list FI
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    term                           shift and go to state 16
+    expr                           shift and go to state 22
+    fact                           shift and go to state 18
+
+state 9
+
+    (1) program -> stmt_list .
+
+    $end            reduce using rule 1 (program -> stmt_list .)
+
+
+state 10
+
+    (6) stmt -> if_stmt .
+
+    SEMICOLON       reduce using rule 6 (stmt -> if_stmt .)
+    ELSE            reduce using rule 6 (stmt -> if_stmt .)
+    END             reduce using rule 6 (stmt -> if_stmt .)
+    FI              reduce using rule 6 (stmt -> if_stmt .)
+    $end            reduce using rule 6 (stmt -> if_stmt .)
+    OD              reduce using rule 6 (stmt -> if_stmt .)
+
+
+state 11
+
+    (5) stmt -> while_stmt .
+
+    SEMICOLON       reduce using rule 5 (stmt -> while_stmt .)
+    ELSE            reduce using rule 5 (stmt -> while_stmt .)
+    END             reduce using rule 5 (stmt -> while_stmt .)
+    FI              reduce using rule 5 (stmt -> while_stmt .)
+    $end            reduce using rule 5 (stmt -> while_stmt .)
+    OD              reduce using rule 5 (stmt -> while_stmt .)
+
+
+state 12
+
+    (16) fact -> NUMBER .
+
+    TIMES           reduce using rule 16 (fact -> NUMBER .)
+    COMMA           reduce using rule 16 (fact -> NUMBER .)
+    PLUS            reduce using rule 16 (fact -> NUMBER .)
+    MINUS           reduce using rule 16 (fact -> NUMBER .)
+    LT              reduce using rule 16 (fact -> NUMBER .)
+    GT              reduce using rule 16 (fact -> NUMBER .)
+    GE              reduce using rule 16 (fact -> NUMBER .)
+    LE              reduce using rule 16 (fact -> NUMBER .)
+    EQ              reduce using rule 16 (fact -> NUMBER .)
+    NE              reduce using rule 16 (fact -> NUMBER .)
+    RPAREN          reduce using rule 16 (fact -> NUMBER .)
+    SEMICOLON       reduce using rule 16 (fact -> NUMBER .)
+    $end            reduce using rule 16 (fact -> NUMBER .)
+    OD              reduce using rule 16 (fact -> NUMBER .)
+    ELSE            reduce using rule 16 (fact -> NUMBER .)
+    FI              reduce using rule 16 (fact -> NUMBER .)
+    END             reduce using rule 16 (fact -> NUMBER .)
+    DO              reduce using rule 16 (fact -> NUMBER .)
+    THEN            reduce using rule 16 (fact -> NUMBER .)
+
+
+state 13
+
+    (17) fact -> IDENT .
+    (25) func_call -> IDENT . LPAREN expr_list RPAREN
+
+    TIMES           reduce using rule 17 (fact -> IDENT .)
+    COMMA           reduce using rule 17 (fact -> IDENT .)
+    PLUS            reduce using rule 17 (fact -> IDENT .)
+    MINUS           reduce using rule 17 (fact -> IDENT .)
+    LT              reduce using rule 17 (fact -> IDENT .)
+    GT              reduce using rule 17 (fact -> IDENT .)
+    GE              reduce using rule 17 (fact -> IDENT .)
+    LE              reduce using rule 17 (fact -> IDENT .)
+    EQ              reduce using rule 17 (fact -> IDENT .)
+    NE              reduce using rule 17 (fact -> IDENT .)
+    RPAREN          reduce using rule 17 (fact -> IDENT .)
+    SEMICOLON       reduce using rule 17 (fact -> IDENT .)
+    $end            reduce using rule 17 (fact -> IDENT .)
+    OD              reduce using rule 17 (fact -> IDENT .)
+    ELSE            reduce using rule 17 (fact -> IDENT .)
+    FI              reduce using rule 17 (fact -> IDENT .)
+    END             reduce using rule 17 (fact -> IDENT .)
+    DO              reduce using rule 17 (fact -> IDENT .)
+    THEN            reduce using rule 17 (fact -> IDENT .)
+    LPAREN          shift and go to state 23
+
+
+state 14
+
+    (18) fact -> func_call .
+
+    TIMES           reduce using rule 18 (fact -> func_call .)
+    COMMA           reduce using rule 18 (fact -> func_call .)
+    PLUS            reduce using rule 18 (fact -> func_call .)
+    MINUS           reduce using rule 18 (fact -> func_call .)
+    LT              reduce using rule 18 (fact -> func_call .)
+    GT              reduce using rule 18 (fact -> func_call .)
+    GE              reduce using rule 18 (fact -> func_call .)
+    LE              reduce using rule 18 (fact -> func_call .)
+    EQ              reduce using rule 18 (fact -> func_call .)
+    NE              reduce using rule 18 (fact -> func_call .)
+    RPAREN          reduce using rule 18 (fact -> func_call .)
+    SEMICOLON       reduce using rule 18 (fact -> func_call .)
+    $end            reduce using rule 18 (fact -> func_call .)
+    OD              reduce using rule 18 (fact -> func_call .)
+    ELSE            reduce using rule 18 (fact -> func_call .)
+    FI              reduce using rule 18 (fact -> func_call .)
+    END             reduce using rule 18 (fact -> func_call .)
+    DO              reduce using rule 18 (fact -> func_call .)
+    THEN            reduce using rule 18 (fact -> func_call .)
+
+
+state 15
+
+    (15) fact -> LPAREN . expr RPAREN
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    expr                           shift and go to state 24
+    term                           shift and go to state 16
+    fact                           shift and go to state 18
+
+state 16
+
+    (12) expr -> term .
+    (13) term -> term . TIMES fact
+
+    COMMA           reduce using rule 12 (expr -> term .)
+    PLUS            reduce using rule 12 (expr -> term .)
+    MINUS           reduce using rule 12 (expr -> term .)
+    LT              reduce using rule 12 (expr -> term .)
+    GT              reduce using rule 12 (expr -> term .)
+    GE              reduce using rule 12 (expr -> term .)
+    LE              reduce using rule 12 (expr -> term .)
+    EQ              reduce using rule 12 (expr -> term .)
+    NE              reduce using rule 12 (expr -> term .)
+    RPAREN          reduce using rule 12 (expr -> term .)
+    DO              reduce using rule 12 (expr -> term .)
+    THEN            reduce using rule 12 (expr -> term .)
+    SEMICOLON       reduce using rule 12 (expr -> term .)
+    $end            reduce using rule 12 (expr -> term .)
+    OD              reduce using rule 12 (expr -> term .)
+    ELSE            reduce using rule 12 (expr -> term .)
+    FI              reduce using rule 12 (expr -> term .)
+    END             reduce using rule 12 (expr -> term .)
+    TIMES           shift and go to state 25
+
+
+state 17
+
+    (20) while_stmt -> WHILE expr . DO stmt_list OD
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+    DO              shift and go to state 26
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+
+state 18
+
+    (14) term -> fact .
+
+    TIMES           reduce using rule 14 (term -> fact .)
+    COMMA           reduce using rule 14 (term -> fact .)
+    PLUS            reduce using rule 14 (term -> fact .)
+    MINUS           reduce using rule 14 (term -> fact .)
+    LT              reduce using rule 14 (term -> fact .)
+    GT              reduce using rule 14 (term -> fact .)
+    GE              reduce using rule 14 (term -> fact .)
+    LE              reduce using rule 14 (term -> fact .)
+    EQ              reduce using rule 14 (term -> fact .)
+    NE              reduce using rule 14 (term -> fact .)
+    RPAREN          reduce using rule 14 (term -> fact .)
+    SEMICOLON       reduce using rule 14 (term -> fact .)
+    $end            reduce using rule 14 (term -> fact .)
+    OD              reduce using rule 14 (term -> fact .)
+    ELSE            reduce using rule 14 (term -> fact .)
+    FI              reduce using rule 14 (term -> fact .)
+    END             reduce using rule 14 (term -> fact .)
+    DO              reduce using rule 14 (term -> fact .)
+    THEN            reduce using rule 14 (term -> fact .)
+
+
+state 19
+
+    (22) define_stmt -> DEFINE IDENT . PROC LPAREN param_list RPAREN stmt_list END
+
+    PROC            shift and go to state 35
+
+
+state 20
+
+    (19) assign_stmt -> IDENT ASSIGNOP . expr
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    expr                           shift and go to state 36
+    term                           shift and go to state 16
+    fact                           shift and go to state 18
+
+state 21
+
+    (2) stmt_list -> stmt SEMICOLON . stmt_list
+    (2) stmt_list -> . stmt SEMICOLON stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . assign_stmt
+    (5) stmt -> . while_stmt
+    (6) stmt -> . if_stmt
+    (7) stmt -> . define_stmt
+    (19) assign_stmt -> . IDENT ASSIGNOP expr
+    (20) while_stmt -> . WHILE expr DO stmt_list OD
+    (21) if_stmt -> . IF expr THEN stmt_list ELSE stmt_list FI
+    (22) define_stmt -> . DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END
+
+    IDENT           shift and go to state 6
+    WHILE           shift and go to state 1
+    IF              shift and go to state 8
+    DEFINE          shift and go to state 5
+
+    stmt_list                      shift and go to state 37
+    if_stmt                        shift and go to state 10
+    define_stmt                    shift and go to state 2
+    stmt                           shift and go to state 7
+    assign_stmt                    shift and go to state 3
+    while_stmt                     shift and go to state 11
+
+state 22
+
+    (21) if_stmt -> IF expr . THEN stmt_list ELSE stmt_list FI
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+    THEN            shift and go to state 38
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+
+state 23
+
+    (25) func_call -> IDENT LPAREN . expr_list RPAREN
+    (10) expr_list -> . expr COMMA expr_list
+    (11) expr_list -> . expr
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    expr_list                      shift and go to state 39
+    term                           shift and go to state 16
+    fact                           shift and go to state 18
+    expr                           shift and go to state 40
+
+state 24
+
+    (15) fact -> LPAREN expr . RPAREN
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+    RPAREN          shift and go to state 41
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+
+state 25
+
+    (13) term -> term TIMES . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    fact                           shift and go to state 42
+
+state 26
+
+    (20) while_stmt -> WHILE expr DO . stmt_list OD
+    (2) stmt_list -> . stmt SEMICOLON stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . assign_stmt
+    (5) stmt -> . while_stmt
+    (6) stmt -> . if_stmt
+    (7) stmt -> . define_stmt
+    (19) assign_stmt -> . IDENT ASSIGNOP expr
+    (20) while_stmt -> . WHILE expr DO stmt_list OD
+    (21) if_stmt -> . IF expr THEN stmt_list ELSE stmt_list FI
+    (22) define_stmt -> . DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END
+
+    IDENT           shift and go to state 6
+    WHILE           shift and go to state 1
+    IF              shift and go to state 8
+    DEFINE          shift and go to state 5
+
+    stmt_list                      shift and go to state 43
+    if_stmt                        shift and go to state 10
+    define_stmt                    shift and go to state 2
+    stmt                           shift and go to state 7
+    assign_stmt                    shift and go to state 3
+    while_stmt                     shift and go to state 11
+
+state 27
+
+    (27) expr -> expr GT . expr
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    expr                           shift and go to state 44
+    term                           shift and go to state 16
+    fact                           shift and go to state 18
+
+state 28
+
+    (28) expr -> expr GE . expr
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    expr                           shift and go to state 45
+    term                           shift and go to state 16
+    fact                           shift and go to state 18
+
+state 29
+
+    (26) expr -> expr LT . expr
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    expr                           shift and go to state 46
+    term                           shift and go to state 16
+    fact                           shift and go to state 18
+
+state 30
+
+    (31) expr -> expr NE . expr
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    expr                           shift and go to state 47
+    term                           shift and go to state 16
+    fact                           shift and go to state 18
+
+state 31
+
+    (29) expr -> expr LE . expr
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    expr                           shift and go to state 48
+    term                           shift and go to state 16
+    fact                           shift and go to state 18
+
+state 32
+
+    (8) expr -> expr PLUS . term
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    term                           shift and go to state 49
+    fact                           shift and go to state 18
+
+state 33
+
+    (30) expr -> expr EQ . expr
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    expr                           shift and go to state 50
+    term                           shift and go to state 16
+    fact                           shift and go to state 18
+
+state 34
+
+    (9) expr -> expr MINUS . term
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    term                           shift and go to state 51
+    fact                           shift and go to state 18
+
+state 35
+
+    (22) define_stmt -> DEFINE IDENT PROC . LPAREN param_list RPAREN stmt_list END
+
+    LPAREN          shift and go to state 52
+
+
+state 36
+
+    (19) assign_stmt -> IDENT ASSIGNOP expr .
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+    SEMICOLON       reduce using rule 19 (assign_stmt -> IDENT ASSIGNOP expr .)
+    $end            reduce using rule 19 (assign_stmt -> IDENT ASSIGNOP expr .)
+    END             reduce using rule 19 (assign_stmt -> IDENT ASSIGNOP expr .)
+    FI              reduce using rule 19 (assign_stmt -> IDENT ASSIGNOP expr .)
+    ELSE            reduce using rule 19 (assign_stmt -> IDENT ASSIGNOP expr .)
+    OD              reduce using rule 19 (assign_stmt -> IDENT ASSIGNOP expr .)
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+
+state 37
+
+    (2) stmt_list -> stmt SEMICOLON stmt_list .
+
+    $end            reduce using rule 2 (stmt_list -> stmt SEMICOLON stmt_list .)
+    ELSE            reduce using rule 2 (stmt_list -> stmt SEMICOLON stmt_list .)
+    END             reduce using rule 2 (stmt_list -> stmt SEMICOLON stmt_list .)
+    OD              reduce using rule 2 (stmt_list -> stmt SEMICOLON stmt_list .)
+    FI              reduce using rule 2 (stmt_list -> stmt SEMICOLON stmt_list .)
+
+
+state 38
+
+    (21) if_stmt -> IF expr THEN . stmt_list ELSE stmt_list FI
+    (2) stmt_list -> . stmt SEMICOLON stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . assign_stmt
+    (5) stmt -> . while_stmt
+    (6) stmt -> . if_stmt
+    (7) stmt -> . define_stmt
+    (19) assign_stmt -> . IDENT ASSIGNOP expr
+    (20) while_stmt -> . WHILE expr DO stmt_list OD
+    (21) if_stmt -> . IF expr THEN stmt_list ELSE stmt_list FI
+    (22) define_stmt -> . DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END
+
+    IDENT           shift and go to state 6
+    WHILE           shift and go to state 1
+    IF              shift and go to state 8
+    DEFINE          shift and go to state 5
+
+    stmt_list                      shift and go to state 53
+    if_stmt                        shift and go to state 10
+    define_stmt                    shift and go to state 2
+    stmt                           shift and go to state 7
+    assign_stmt                    shift and go to state 3
+    while_stmt                     shift and go to state 11
+
+state 39
+
+    (25) func_call -> IDENT LPAREN expr_list . RPAREN
+
+    RPAREN          shift and go to state 54
+
+
+state 40
+
+    (10) expr_list -> expr . COMMA expr_list
+    (11) expr_list -> expr .
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+    COMMA           shift and go to state 55
+    RPAREN          reduce using rule 11 (expr_list -> expr .)
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+
+state 41
+
+    (15) fact -> LPAREN expr RPAREN .
+
+    TIMES           reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    COMMA           reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    PLUS            reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    MINUS           reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    LT              reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    GT              reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    GE              reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    LE              reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    EQ              reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    NE              reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    RPAREN          reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    SEMICOLON       reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    $end            reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    OD              reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    ELSE            reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    FI              reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    END             reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    DO              reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+    THEN            reduce using rule 15 (fact -> LPAREN expr RPAREN .)
+
+
+state 42
+
+    (13) term -> term TIMES fact .
+
+    TIMES           reduce using rule 13 (term -> term TIMES fact .)
+    COMMA           reduce using rule 13 (term -> term TIMES fact .)
+    PLUS            reduce using rule 13 (term -> term TIMES fact .)
+    MINUS           reduce using rule 13 (term -> term TIMES fact .)
+    LT              reduce using rule 13 (term -> term TIMES fact .)
+    GT              reduce using rule 13 (term -> term TIMES fact .)
+    GE              reduce using rule 13 (term -> term TIMES fact .)
+    LE              reduce using rule 13 (term -> term TIMES fact .)
+    EQ              reduce using rule 13 (term -> term TIMES fact .)
+    NE              reduce using rule 13 (term -> term TIMES fact .)
+    RPAREN          reduce using rule 13 (term -> term TIMES fact .)
+    SEMICOLON       reduce using rule 13 (term -> term TIMES fact .)
+    $end            reduce using rule 13 (term -> term TIMES fact .)
+    OD              reduce using rule 13 (term -> term TIMES fact .)
+    ELSE            reduce using rule 13 (term -> term TIMES fact .)
+    FI              reduce using rule 13 (term -> term TIMES fact .)
+    END             reduce using rule 13 (term -> term TIMES fact .)
+    DO              reduce using rule 13 (term -> term TIMES fact .)
+    THEN            reduce using rule 13 (term -> term TIMES fact .)
+
+
+state 43
+
+    (20) while_stmt -> WHILE expr DO stmt_list . OD
+
+    OD              shift and go to state 56
+
+
+state 44
+
+    (27) expr -> expr GT expr .
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for GE resolved as shift
+  ! shift/reduce conflict for LE resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NE resolved as shift
+    COMMA           reduce using rule 27 (expr -> expr GT expr .)
+    RPAREN          reduce using rule 27 (expr -> expr GT expr .)
+    DO              reduce using rule 27 (expr -> expr GT expr .)
+    THEN            reduce using rule 27 (expr -> expr GT expr .)
+    SEMICOLON       reduce using rule 27 (expr -> expr GT expr .)
+    $end            reduce using rule 27 (expr -> expr GT expr .)
+    OD              reduce using rule 27 (expr -> expr GT expr .)
+    ELSE            reduce using rule 27 (expr -> expr GT expr .)
+    FI              reduce using rule 27 (expr -> expr GT expr .)
+    END             reduce using rule 27 (expr -> expr GT expr .)
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+  ! PLUS            [ reduce using rule 27 (expr -> expr GT expr .) ]
+  ! MINUS           [ reduce using rule 27 (expr -> expr GT expr .) ]
+  ! LT              [ reduce using rule 27 (expr -> expr GT expr .) ]
+  ! GT              [ reduce using rule 27 (expr -> expr GT expr .) ]
+  ! GE              [ reduce using rule 27 (expr -> expr GT expr .) ]
+  ! LE              [ reduce using rule 27 (expr -> expr GT expr .) ]
+  ! EQ              [ reduce using rule 27 (expr -> expr GT expr .) ]
+  ! NE              [ reduce using rule 27 (expr -> expr GT expr .) ]
+
+
+state 45
+
+    (28) expr -> expr GE expr .
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for GE resolved as shift
+  ! shift/reduce conflict for LE resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NE resolved as shift
+    COMMA           reduce using rule 28 (expr -> expr GE expr .)
+    RPAREN          reduce using rule 28 (expr -> expr GE expr .)
+    DO              reduce using rule 28 (expr -> expr GE expr .)
+    THEN            reduce using rule 28 (expr -> expr GE expr .)
+    SEMICOLON       reduce using rule 28 (expr -> expr GE expr .)
+    $end            reduce using rule 28 (expr -> expr GE expr .)
+    OD              reduce using rule 28 (expr -> expr GE expr .)
+    ELSE            reduce using rule 28 (expr -> expr GE expr .)
+    FI              reduce using rule 28 (expr -> expr GE expr .)
+    END             reduce using rule 28 (expr -> expr GE expr .)
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+  ! PLUS            [ reduce using rule 28 (expr -> expr GE expr .) ]
+  ! MINUS           [ reduce using rule 28 (expr -> expr GE expr .) ]
+  ! LT              [ reduce using rule 28 (expr -> expr GE expr .) ]
+  ! GT              [ reduce using rule 28 (expr -> expr GE expr .) ]
+  ! GE              [ reduce using rule 28 (expr -> expr GE expr .) ]
+  ! LE              [ reduce using rule 28 (expr -> expr GE expr .) ]
+  ! EQ              [ reduce using rule 28 (expr -> expr GE expr .) ]
+  ! NE              [ reduce using rule 28 (expr -> expr GE expr .) ]
+
+
+state 46
+
+    (26) expr -> expr LT expr .
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for GE resolved as shift
+  ! shift/reduce conflict for LE resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NE resolved as shift
+    COMMA           reduce using rule 26 (expr -> expr LT expr .)
+    RPAREN          reduce using rule 26 (expr -> expr LT expr .)
+    DO              reduce using rule 26 (expr -> expr LT expr .)
+    THEN            reduce using rule 26 (expr -> expr LT expr .)
+    SEMICOLON       reduce using rule 26 (expr -> expr LT expr .)
+    $end            reduce using rule 26 (expr -> expr LT expr .)
+    OD              reduce using rule 26 (expr -> expr LT expr .)
+    ELSE            reduce using rule 26 (expr -> expr LT expr .)
+    FI              reduce using rule 26 (expr -> expr LT expr .)
+    END             reduce using rule 26 (expr -> expr LT expr .)
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+  ! PLUS            [ reduce using rule 26 (expr -> expr LT expr .) ]
+  ! MINUS           [ reduce using rule 26 (expr -> expr LT expr .) ]
+  ! LT              [ reduce using rule 26 (expr -> expr LT expr .) ]
+  ! GT              [ reduce using rule 26 (expr -> expr LT expr .) ]
+  ! GE              [ reduce using rule 26 (expr -> expr LT expr .) ]
+  ! LE              [ reduce using rule 26 (expr -> expr LT expr .) ]
+  ! EQ              [ reduce using rule 26 (expr -> expr LT expr .) ]
+  ! NE              [ reduce using rule 26 (expr -> expr LT expr .) ]
+
+
+state 47
+
+    (31) expr -> expr NE expr .
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for GE resolved as shift
+  ! shift/reduce conflict for LE resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NE resolved as shift
+    COMMA           reduce using rule 31 (expr -> expr NE expr .)
+    RPAREN          reduce using rule 31 (expr -> expr NE expr .)
+    DO              reduce using rule 31 (expr -> expr NE expr .)
+    THEN            reduce using rule 31 (expr -> expr NE expr .)
+    SEMICOLON       reduce using rule 31 (expr -> expr NE expr .)
+    $end            reduce using rule 31 (expr -> expr NE expr .)
+    OD              reduce using rule 31 (expr -> expr NE expr .)
+    ELSE            reduce using rule 31 (expr -> expr NE expr .)
+    FI              reduce using rule 31 (expr -> expr NE expr .)
+    END             reduce using rule 31 (expr -> expr NE expr .)
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+  ! PLUS            [ reduce using rule 31 (expr -> expr NE expr .) ]
+  ! MINUS           [ reduce using rule 31 (expr -> expr NE expr .) ]
+  ! LT              [ reduce using rule 31 (expr -> expr NE expr .) ]
+  ! GT              [ reduce using rule 31 (expr -> expr NE expr .) ]
+  ! GE              [ reduce using rule 31 (expr -> expr NE expr .) ]
+  ! LE              [ reduce using rule 31 (expr -> expr NE expr .) ]
+  ! EQ              [ reduce using rule 31 (expr -> expr NE expr .) ]
+  ! NE              [ reduce using rule 31 (expr -> expr NE expr .) ]
+
+
+state 48
+
+    (29) expr -> expr LE expr .
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for GE resolved as shift
+  ! shift/reduce conflict for LE resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NE resolved as shift
+    COMMA           reduce using rule 29 (expr -> expr LE expr .)
+    RPAREN          reduce using rule 29 (expr -> expr LE expr .)
+    DO              reduce using rule 29 (expr -> expr LE expr .)
+    THEN            reduce using rule 29 (expr -> expr LE expr .)
+    SEMICOLON       reduce using rule 29 (expr -> expr LE expr .)
+    $end            reduce using rule 29 (expr -> expr LE expr .)
+    OD              reduce using rule 29 (expr -> expr LE expr .)
+    ELSE            reduce using rule 29 (expr -> expr LE expr .)
+    FI              reduce using rule 29 (expr -> expr LE expr .)
+    END             reduce using rule 29 (expr -> expr LE expr .)
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+  ! PLUS            [ reduce using rule 29 (expr -> expr LE expr .) ]
+  ! MINUS           [ reduce using rule 29 (expr -> expr LE expr .) ]
+  ! LT              [ reduce using rule 29 (expr -> expr LE expr .) ]
+  ! GT              [ reduce using rule 29 (expr -> expr LE expr .) ]
+  ! GE              [ reduce using rule 29 (expr -> expr LE expr .) ]
+  ! LE              [ reduce using rule 29 (expr -> expr LE expr .) ]
+  ! EQ              [ reduce using rule 29 (expr -> expr LE expr .) ]
+  ! NE              [ reduce using rule 29 (expr -> expr LE expr .) ]
+
+
+state 49
+
+    (8) expr -> expr PLUS term .
+    (13) term -> term . TIMES fact
+
+    COMMA           reduce using rule 8 (expr -> expr PLUS term .)
+    PLUS            reduce using rule 8 (expr -> expr PLUS term .)
+    MINUS           reduce using rule 8 (expr -> expr PLUS term .)
+    LT              reduce using rule 8 (expr -> expr PLUS term .)
+    GT              reduce using rule 8 (expr -> expr PLUS term .)
+    GE              reduce using rule 8 (expr -> expr PLUS term .)
+    LE              reduce using rule 8 (expr -> expr PLUS term .)
+    EQ              reduce using rule 8 (expr -> expr PLUS term .)
+    NE              reduce using rule 8 (expr -> expr PLUS term .)
+    RPAREN          reduce using rule 8 (expr -> expr PLUS term .)
+    DO              reduce using rule 8 (expr -> expr PLUS term .)
+    THEN            reduce using rule 8 (expr -> expr PLUS term .)
+    SEMICOLON       reduce using rule 8 (expr -> expr PLUS term .)
+    $end            reduce using rule 8 (expr -> expr PLUS term .)
+    OD              reduce using rule 8 (expr -> expr PLUS term .)
+    ELSE            reduce using rule 8 (expr -> expr PLUS term .)
+    FI              reduce using rule 8 (expr -> expr PLUS term .)
+    END             reduce using rule 8 (expr -> expr PLUS term .)
+    TIMES           shift and go to state 25
+
+
+state 50
+
+    (30) expr -> expr EQ expr .
+    (8) expr -> expr . PLUS term
+    (9) expr -> expr . MINUS term
+    (26) expr -> expr . LT expr
+    (27) expr -> expr . GT expr
+    (28) expr -> expr . GE expr
+    (29) expr -> expr . LE expr
+    (30) expr -> expr . EQ expr
+    (31) expr -> expr . NE expr
+
+  ! shift/reduce conflict for PLUS resolved as shift
+  ! shift/reduce conflict for MINUS resolved as shift
+  ! shift/reduce conflict for LT resolved as shift
+  ! shift/reduce conflict for GT resolved as shift
+  ! shift/reduce conflict for GE resolved as shift
+  ! shift/reduce conflict for LE resolved as shift
+  ! shift/reduce conflict for EQ resolved as shift
+  ! shift/reduce conflict for NE resolved as shift
+    COMMA           reduce using rule 30 (expr -> expr EQ expr .)
+    RPAREN          reduce using rule 30 (expr -> expr EQ expr .)
+    DO              reduce using rule 30 (expr -> expr EQ expr .)
+    THEN            reduce using rule 30 (expr -> expr EQ expr .)
+    SEMICOLON       reduce using rule 30 (expr -> expr EQ expr .)
+    $end            reduce using rule 30 (expr -> expr EQ expr .)
+    OD              reduce using rule 30 (expr -> expr EQ expr .)
+    ELSE            reduce using rule 30 (expr -> expr EQ expr .)
+    FI              reduce using rule 30 (expr -> expr EQ expr .)
+    END             reduce using rule 30 (expr -> expr EQ expr .)
+    PLUS            shift and go to state 32
+    MINUS           shift and go to state 34
+    LT              shift and go to state 29
+    GT              shift and go to state 27
+    GE              shift and go to state 28
+    LE              shift and go to state 31
+    EQ              shift and go to state 33
+    NE              shift and go to state 30
+
+  ! PLUS            [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! MINUS           [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! LT              [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! GT              [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! GE              [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! LE              [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! EQ              [ reduce using rule 30 (expr -> expr EQ expr .) ]
+  ! NE              [ reduce using rule 30 (expr -> expr EQ expr .) ]
+
+
+state 51
+
+    (9) expr -> expr MINUS term .
+    (13) term -> term . TIMES fact
+
+    COMMA           reduce using rule 9 (expr -> expr MINUS term .)
+    PLUS            reduce using rule 9 (expr -> expr MINUS term .)
+    MINUS           reduce using rule 9 (expr -> expr MINUS term .)
+    LT              reduce using rule 9 (expr -> expr MINUS term .)
+    GT              reduce using rule 9 (expr -> expr MINUS term .)
+    GE              reduce using rule 9 (expr -> expr MINUS term .)
+    LE              reduce using rule 9 (expr -> expr MINUS term .)
+    EQ              reduce using rule 9 (expr -> expr MINUS term .)
+    NE              reduce using rule 9 (expr -> expr MINUS term .)
+    RPAREN          reduce using rule 9 (expr -> expr MINUS term .)
+    DO              reduce using rule 9 (expr -> expr MINUS term .)
+    THEN            reduce using rule 9 (expr -> expr MINUS term .)
+    SEMICOLON       reduce using rule 9 (expr -> expr MINUS term .)
+    $end            reduce using rule 9 (expr -> expr MINUS term .)
+    OD              reduce using rule 9 (expr -> expr MINUS term .)
+    ELSE            reduce using rule 9 (expr -> expr MINUS term .)
+    FI              reduce using rule 9 (expr -> expr MINUS term .)
+    END             reduce using rule 9 (expr -> expr MINUS term .)
+    TIMES           shift and go to state 25
+
+
+state 52
+
+    (22) define_stmt -> DEFINE IDENT PROC LPAREN . param_list RPAREN stmt_list END
+    (23) param_list -> . IDENT COMMA param_list
+    (24) param_list -> . IDENT
+
+    IDENT           shift and go to state 57
+
+    param_list                     shift and go to state 58
+
+state 53
+
+    (21) if_stmt -> IF expr THEN stmt_list . ELSE stmt_list FI
+
+    ELSE            shift and go to state 59
+
+
+state 54
+
+    (25) func_call -> IDENT LPAREN expr_list RPAREN .
+
+    TIMES           reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    PLUS            reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    MINUS           reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    LT              reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    GT              reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    GE              reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    LE              reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    EQ              reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    NE              reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    DO              reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    THEN            reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    RPAREN          reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    SEMICOLON       reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    $end            reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    OD              reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    ELSE            reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    FI              reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    END             reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+    COMMA           reduce using rule 25 (func_call -> IDENT LPAREN expr_list RPAREN .)
+
+
+state 55
+
+    (10) expr_list -> expr COMMA . expr_list
+    (10) expr_list -> . expr COMMA expr_list
+    (11) expr_list -> . expr
+    (8) expr -> . expr PLUS term
+    (9) expr -> . expr MINUS term
+    (12) expr -> . term
+    (26) expr -> . expr LT expr
+    (27) expr -> . expr GT expr
+    (28) expr -> . expr GE expr
+    (29) expr -> . expr LE expr
+    (30) expr -> . expr EQ expr
+    (31) expr -> . expr NE expr
+    (13) term -> . term TIMES fact
+    (14) term -> . fact
+    (15) fact -> . LPAREN expr RPAREN
+    (16) fact -> . NUMBER
+    (17) fact -> . IDENT
+    (18) fact -> . func_call
+    (25) func_call -> . IDENT LPAREN expr_list RPAREN
+
+    LPAREN          shift and go to state 15
+    NUMBER          shift and go to state 12
+    IDENT           shift and go to state 13
+
+    func_call                      shift and go to state 14
+    expr                           shift and go to state 40
+    term                           shift and go to state 16
+    fact                           shift and go to state 18
+    expr_list                      shift and go to state 60
+
+state 56
+
+    (20) while_stmt -> WHILE expr DO stmt_list OD .
+
+    SEMICOLON       reduce using rule 20 (while_stmt -> WHILE expr DO stmt_list OD .)
+    END             reduce using rule 20 (while_stmt -> WHILE expr DO stmt_list OD .)
+    FI              reduce using rule 20 (while_stmt -> WHILE expr DO stmt_list OD .)
+    ELSE            reduce using rule 20 (while_stmt -> WHILE expr DO stmt_list OD .)
+    OD              reduce using rule 20 (while_stmt -> WHILE expr DO stmt_list OD .)
+    $end            reduce using rule 20 (while_stmt -> WHILE expr DO stmt_list OD .)
+
+
+state 57
+
+    (23) param_list -> IDENT . COMMA param_list
+    (24) param_list -> IDENT .
+
+    COMMA           shift and go to state 61
+    RPAREN          reduce using rule 24 (param_list -> IDENT .)
+
+
+state 58
+
+    (22) define_stmt -> DEFINE IDENT PROC LPAREN param_list . RPAREN stmt_list END
+
+    RPAREN          shift and go to state 62
+
+
+state 59
+
+    (21) if_stmt -> IF expr THEN stmt_list ELSE . stmt_list FI
+    (2) stmt_list -> . stmt SEMICOLON stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . assign_stmt
+    (5) stmt -> . while_stmt
+    (6) stmt -> . if_stmt
+    (7) stmt -> . define_stmt
+    (19) assign_stmt -> . IDENT ASSIGNOP expr
+    (20) while_stmt -> . WHILE expr DO stmt_list OD
+    (21) if_stmt -> . IF expr THEN stmt_list ELSE stmt_list FI
+    (22) define_stmt -> . DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END
+
+    IDENT           shift and go to state 6
+    WHILE           shift and go to state 1
+    IF              shift and go to state 8
+    DEFINE          shift and go to state 5
+
+    stmt_list                      shift and go to state 63
+    if_stmt                        shift and go to state 10
+    define_stmt                    shift and go to state 2
+    stmt                           shift and go to state 7
+    assign_stmt                    shift and go to state 3
+    while_stmt                     shift and go to state 11
+
+state 60
+
+    (10) expr_list -> expr COMMA expr_list .
+
+    RPAREN          reduce using rule 10 (expr_list -> expr COMMA expr_list .)
+
+
+state 61
+
+    (23) param_list -> IDENT COMMA . param_list
+    (23) param_list -> . IDENT COMMA param_list
+    (24) param_list -> . IDENT
+
+    IDENT           shift and go to state 57
+
+    param_list                     shift and go to state 64
+
+state 62
+
+    (22) define_stmt -> DEFINE IDENT PROC LPAREN param_list RPAREN . stmt_list END
+    (2) stmt_list -> . stmt SEMICOLON stmt_list
+    (3) stmt_list -> . stmt
+    (4) stmt -> . assign_stmt
+    (5) stmt -> . while_stmt
+    (6) stmt -> . if_stmt
+    (7) stmt -> . define_stmt
+    (19) assign_stmt -> . IDENT ASSIGNOP expr
+    (20) while_stmt -> . WHILE expr DO stmt_list OD
+    (21) if_stmt -> . IF expr THEN stmt_list ELSE stmt_list FI
+    (22) define_stmt -> . DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END
+
+    IDENT           shift and go to state 6
+    WHILE           shift and go to state 1
+    IF              shift and go to state 8
+    DEFINE          shift and go to state 5
+
+    stmt_list                      shift and go to state 65
+    if_stmt                        shift and go to state 10
+    define_stmt                    shift and go to state 2
+    stmt                           shift and go to state 7
+    assign_stmt                    shift and go to state 3
+    while_stmt                     shift and go to state 11
+
+state 63
+
+    (21) if_stmt -> IF expr THEN stmt_list ELSE stmt_list . FI
+
+    FI              shift and go to state 66
+
+
+state 64
+
+    (23) param_list -> IDENT COMMA param_list .
+
+    RPAREN          reduce using rule 23 (param_list -> IDENT COMMA param_list .)
+
+
+state 65
+
+    (22) define_stmt -> DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list . END
+
+    END             shift and go to state 67
+
+
+state 66
+
+    (21) if_stmt -> IF expr THEN stmt_list ELSE stmt_list FI .
+
+    SEMICOLON       reduce using rule 21 (if_stmt -> IF expr THEN stmt_list ELSE stmt_list FI .)
+    FI              reduce using rule 21 (if_stmt -> IF expr THEN stmt_list ELSE stmt_list FI .)
+    END             reduce using rule 21 (if_stmt -> IF expr THEN stmt_list ELSE stmt_list FI .)
+    ELSE            reduce using rule 21 (if_stmt -> IF expr THEN stmt_list ELSE stmt_list FI .)
+    OD              reduce using rule 21 (if_stmt -> IF expr THEN stmt_list ELSE stmt_list FI .)
+    $end            reduce using rule 21 (if_stmt -> IF expr THEN stmt_list ELSE stmt_list FI .)
+
+
+state 67
+
+    (22) define_stmt -> DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END .
+
+    SEMICOLON       reduce using rule 22 (define_stmt -> DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END .)
+    FI              reduce using rule 22 (define_stmt -> DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END .)
+    END             reduce using rule 22 (define_stmt -> DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END .)
+    $end            reduce using rule 22 (define_stmt -> DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END .)
+    ELSE            reduce using rule 22 (define_stmt -> DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END .)
+    OD              reduce using rule 22 (define_stmt -> DEFINE IDENT PROC LPAREN param_list RPAREN stmt_list END .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for PLUS in state 44 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 44 resolved as shift
+WARNING: shift/reduce conflict for LT in state 44 resolved as shift
+WARNING: shift/reduce conflict for GT in state 44 resolved as shift
+WARNING: shift/reduce conflict for GE in state 44 resolved as shift
+WARNING: shift/reduce conflict for LE in state 44 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 44 resolved as shift
+WARNING: shift/reduce conflict for NE in state 44 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 45 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 45 resolved as shift
+WARNING: shift/reduce conflict for LT in state 45 resolved as shift
+WARNING: shift/reduce conflict for GT in state 45 resolved as shift
+WARNING: shift/reduce conflict for GE in state 45 resolved as shift
+WARNING: shift/reduce conflict for LE in state 45 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 45 resolved as shift
+WARNING: shift/reduce conflict for NE in state 45 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 46 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 46 resolved as shift
+WARNING: shift/reduce conflict for LT in state 46 resolved as shift
+WARNING: shift/reduce conflict for GT in state 46 resolved as shift
+WARNING: shift/reduce conflict for GE in state 46 resolved as shift
+WARNING: shift/reduce conflict for LE in state 46 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 46 resolved as shift
+WARNING: shift/reduce conflict for NE in state 46 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 47 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 47 resolved as shift
+WARNING: shift/reduce conflict for LT in state 47 resolved as shift
+WARNING: shift/reduce conflict for GT in state 47 resolved as shift
+WARNING: shift/reduce conflict for GE in state 47 resolved as shift
+WARNING: shift/reduce conflict for LE in state 47 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 47 resolved as shift
+WARNING: shift/reduce conflict for NE in state 47 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 48 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 48 resolved as shift
+WARNING: shift/reduce conflict for LT in state 48 resolved as shift
+WARNING: shift/reduce conflict for GT in state 48 resolved as shift
+WARNING: shift/reduce conflict for GE in state 48 resolved as shift
+WARNING: shift/reduce conflict for LE in state 48 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 48 resolved as shift
+WARNING: shift/reduce conflict for NE in state 48 resolved as shift
+WARNING: shift/reduce conflict for PLUS in state 50 resolved as shift
+WARNING: shift/reduce conflict for MINUS in state 50 resolved as shift
+WARNING: shift/reduce conflict for LT in state 50 resolved as shift
+WARNING: shift/reduce conflict for GT in state 50 resolved as shift
+WARNING: shift/reduce conflict for GE in state 50 resolved as shift
+WARNING: shift/reduce conflict for LE in state 50 resolved as shift
+WARNING: shift/reduce conflict for EQ in state 50 resolved as shift
+WARNING: shift/reduce conflict for NE in state 50 resolved as shift
